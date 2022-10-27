@@ -1,0 +1,22 @@
+{% extends 'travel/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<nav class="nav-short">
+  <ul class="nav-list">
+    <li><a href="/">Home</a></li>
+    <li><a href="{% url 'travel-international' %}">International</a></li>
+    <li><a href="{% url 'travel-domestic' %}">Domestic</a></li>
+    <li><a href="#tools">About</a></li>
+  </ul>
+  <div class="nav-buttons">
+    {% if user.is_authenticated %}
+    <a href="{% url 'profile' %}"><button class="login-button">Profile</button></a>
+    <a href="{% url 'logout' %}"><button class="signup-button">Logout</button></a>
+    {% else %}
+    <a href="{% url 'login' %}"><button class="login-button">Login</button></a>
+    <a href="{% url 'register' %}"><button class="signup-button">SignUp</button></a>
+    {% endif %}
+  </div>
+</nav>
+<img src="{{ user.profile.image.url }}" class="profile-img">
+{% endblock content %}
