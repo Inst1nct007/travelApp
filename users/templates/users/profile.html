@@ -6,7 +6,7 @@
     <li><a href="/">Home</a></li>
     <li><a href="{% url 'travel-international' %}">International</a></li>
     <li><a href="{% url 'travel-domestic' %}">Domestic</a></li>
-    <li><a href="#tools">About</a></li>
+    <li><a href="{% url 'travel-about' %}">About</a></li>
   </ul>
   <div class="nav-buttons">
     {% if user.is_authenticated %}
@@ -18,5 +18,24 @@
     {% endif %}
   </div>
 </nav>
-<img src="{{ user.profile.image.url }}" class="profile-img">
+<div class="profile-card">
+  <div class="card">
+  <img src="{{ user.profile.image.url }}" alt="image" class="card-img">
+  <div class="card-info">
+    <h1 class="text-heading"><b>Username: {{ user.profile.user }}</b></h1>
+    <h1 class="text-heading"><b>Email: {{ user.profile.user.email }}</b></h1>
+  </div>
+  </div>
+</div>
+<div class="profile-card">
+<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card">
+            <legend>Update Profile</legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </div>
+        <button class="login-button">Update</button>
+</form>
+</div>
 {% endblock content %}

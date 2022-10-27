@@ -1,12 +1,11 @@
 {% extends 'travel/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
 <nav class="nav-short">
   <ul class="nav-list">
     <li><a href="/">Home</a></li>
     <li><a href="{% url 'travel-international' %}">International</a></li>
     <li><a href="{% url 'travel-domestic' %}">Domestic</a></li>
-    <li><a href="{% url 'travel-about' %}">About</a></li>
+    <li><a href="#tools">About</a></li>
   </ul>
   <div class="nav-buttons">
     {% if user.is_authenticated %}
@@ -18,15 +17,15 @@
     {% endif %}
   </div>
 </nav>
-<div class="login">
-    <form method="post">
-        {% csrf_token %}
-        <fieldset>
-            <legend>Login</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <button class="login-button">Login</button>
-    </form>
-    <small>Don't Have An Account? <a href="{% url 'register' %}">SignUp</a></small>
+<div class="place-cards">
+  {% for place in places_to_visit %}
+  <div class="place-card">
+  <img src="{{ place.image.url }}" alt="image" class="place-card-img">
+  <div class="place-card-info">
+    <h1 class="text-heading"><b>{{ place.name }}</b></h1>
+    <p class="text-para">{{ place.description }}</p>
+  </div>
+  </div>
+  {% endfor %}
 </div>
 {% endblock content %}

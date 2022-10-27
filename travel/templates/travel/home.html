@@ -1,12 +1,11 @@
 {% extends 'travel/base.html' %}
-
 {% block content %}
 <nav>
   <ul class="nav-list">
     <li><a href="">Home</a></li>
     <li><a href="{% url 'travel-international' %}">International</a></li>
     <li><a href="{% url 'travel-domestic' %}">Domestic</a></li>
-    <li><a href="#tools">About</a></li>
+    <li><a href="{% url 'travel-about' %}">About</a></li>
   </ul>
   <div class="nav-buttons">
     {% if user.is_authenticated %}
@@ -24,7 +23,9 @@
 </div>
 <div class="cards">
   {% for place in places %}
+  {% if user.is_authenticated %}
   {% if forloop.counter <= 6 %}
+  <a href="{% url 'place-details' place.id %}" style="color: black; text-decoration: none;">
   <div class="card">
   <img src="{{ place.image.url }}" alt="image" class="card-img">
   <div class="card-info">
@@ -33,6 +34,21 @@
     <p class="text-para">{{ place.description }}</p>
   </div>
   </div>
+  </a>
+  {% endif %}
+  {% else %}
+  {% if forloop.counter <= 6 %}
+  <a href="{% url 'login' %}" style="color: black; text-decoration: none;">
+  <div class="card">
+  <img src="{{ place.image.url }}" alt="image" class="card-img">
+  <div class="card-info">
+    <p class="text-para" id="card-category">{{ place.category }}</p>
+    <h1 class="text-heading"><b>{{ place.name }}</b></h1>
+    <p class="text-para">{{ place.description }}</p>
+  </div>
+  </div>
+  </a>
+  {% endif %}
   {% endif %}
   {% endfor %}
 </div>

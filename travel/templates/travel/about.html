@@ -1,5 +1,4 @@
 {% extends 'travel/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
 <nav class="nav-short">
   <ul class="nav-list">
@@ -18,15 +17,16 @@
     {% endif %}
   </div>
 </nav>
-<div class="login">
-    <form method="post">
-        {% csrf_token %}
-        <fieldset>
-            <legend>Login</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <button class="login-button">Login</button>
-    </form>
-    <small>Don't Have An Account? <a href="{% url 'register' %}">SignUp</a></small>
+<div class="about">
+    <div class="empty-space"></div>
+    <img src="/media/landscape.jpg" class="about-img">
+    <h1><b>We Help You Travel</b></h1>
+</div>
+<div class="empty-space"></div>
+<div class="empty-space"></div>
+<div class="empty-space"></div>
+<div class="empty-space"></div>
+<div class="about-info">
+  <h1>Minor Project</h1>
 </div>
 {% endblock content %}
