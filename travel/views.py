@@ -21,7 +21,8 @@ class PlaceListView(ListView):
 def details(request, pk):
     context = {
         'title': 'Details',
-        'places_to_visit': PlacesToVisit.objects.filter(place=Place.objects.filter(id=pk)[0])
+        'places_to_visit': PlacesToVisit.objects.filter(place=Place.objects.filter(id=pk)[0]),
+        'price': Place.objects.filter(id=pk)[0].price
     }
     return render(request, 'travel/place_details.html', context)
 

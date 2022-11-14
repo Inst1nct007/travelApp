@@ -11,6 +11,7 @@ class Place(models.Model):
     description = models.TextField()
     image = models.ImageField(default='landscape.jpg', upload_to='places')
     category = models.CharField(max_length=30, null=True, choices=CATEGORY_CHOICES)
+    price = models.BigIntegerField(null=True)
 
     def __str__(self):
         return self.name
